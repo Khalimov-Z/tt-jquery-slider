@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery Ui Slider</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style>
+  #red, #green, #blue {
+    float: left;
+    clear: left;
+    width: 300px;
+    margin: 15px;
+  }
+  #background {
+    width: 200px;
+    height: 120px;
+    margin-top: 18px;
+    margin-left: 350px;
+    background-image: none;
+    padding: 10px 5px;
+  }
+  #btn-1 {
+    background-color: white;
+    padding: 5px 10px;
+    font-size: 16px; 
+    margin-right: 10px;
+  }
+  #btn-2 {
+    background-color: blue;
+    padding: 5px 10px;
+    font-size: 16px; 
+    color: white;
+  }
+  #red .ui-slider-range { background: #ef2929; }
+  #red .ui-slider-handle { border-color: #ef2929; }
+  #green .ui-slider-range { background: #8ae234; }
+  #green .ui-slider-handle { border-color: #8ae234; }
+  #blue .ui-slider-range { background: #729fcf; }
+  #blue .ui-slider-handle { border-color: #729fcf; }
+  </style>
+  <script>
+  function hexFromRGB(r, g, b) {
+    const hex = [
+      r.toString( 16 ),
+      g.toString( 16 ),
+      b.toString( 16 )
+    ];
+    $.each( hex, function( nr, val ) {
+      if ( val.length === 1 ) {
+        hex[ nr ] = "0" + val;
+      }
+    });
+    return hex.join( "" ).toUpperCase();
+  }
+ 
+ $(document).ready(function(){
+      $("#btn-2").click(function(event){
+
+       function refreshBackgroundColor() {
+    const red = $( "#red" ).slider( "value" ),
+      green = $( "#green" ).slider( "value" ),
+      blue = $( "#blue" ).slider( "value" ),
+      hex = hexFromRGB( red, green, blue );
+    $( "#background" ).css( "background-color", "#" + hex );
+  }
+
+  $(function() {
+    $( "#red, #green, #blue" ).slider({
+      orientation: "horizontal",
+      range: "min",
+      max: 255,
+      value: 127,
+      stop: refreshBackgroundColor,
+    });
+    $( "#red" ).slider( "value" );
+    $( "#green" ).slider( "value" );
+    $( "#blue" ).slider( "value");
+  });
+
+      });
+    });
+
+  $(document).ready(function(){
+      $("#btn-1").click(function(event){
+
+        function refreshTextColor() {
+    const red = $( "#red" ).slider( "value" ),
+      green = $( "#green" ).slider( "value" ),
+      blue = $( "#blue" ).slider( "value" ),
+      hex = hexFromRGB( red, green, blue );
+    $( "#text" ).css( "color", "#" + hex );
+  }
+
+  $(function() {
+    $( "#red, #green, #blue" ).slider({
+      orientation: "horizontal",
+      range: "min",
+      max: 255,
+      value: 127,
+      stop: refreshTextColor,
+    });
+    $( "#red" ).slider( "value");
+    $( "#green" ).slider( "value");
+    $( "#blue" ).slider( "value");    
+  });
+      });
+    });
+
+  </script>
+</head>
+<body class="ui-widget-content" style="border:0;">
+<p class="ui-state-default ui-corner-all ui-helper-clearfix u" style="padding:10px;">
+  <button id="btn-1">
+    color
+  </button>
+  <button id='btn-2'>
+    backgroundColor
+  </button>
+ 
+</p>
+ 
+<div id="red"></div>
+<div id="green"></div>
+<div id="blue"></div>
+ 
+<div id="background" class="ui-widget-content ui-corner-all">
+  <div id="text" >
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quisn culpa qui 
+  </div>
+</div>
+ 
+ 
+</body>
+</html>
